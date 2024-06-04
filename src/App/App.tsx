@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AppStyled, FormHolder, FormInput, FormLabel, FormSelect } from "./App.styled";
 import ToastContainer from "../ui/ToastContainer";
-import UseToasts from "../hooks/useToasts";
+import { useToast } from "../providers/ToastProviders/ToastContext/useToasts";
 
 type CardType = "NORMAL" | "WARNING" | "ERROR";
 
@@ -9,7 +9,7 @@ function App() {
   const [message, setMessage] = useState<string>("");
   const [time, setTime] = useState<number>(5000);
   const [cardType, setCardType] = useState<CardType>("NORMAL");
-  const { addNewToast } = UseToasts();
+  const { creteToast } = useToast();
 
   return (
     <AppStyled>
@@ -32,7 +32,7 @@ function App() {
             <option value={"ERROR"}>Error</option>
           </FormSelect>
         </FormLabel>
-        <button onClick={() => addNewToast({ id: Date.now(), duration: time, text: message, type: cardType })}>
+        <button onClick={() => creteToast({ id: Date.now(), duration: time, text: message, type: cardType })}>
           Submit
         </button>
       </FormHolder>
