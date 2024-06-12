@@ -1,10 +1,10 @@
 import { createPortal } from "react-dom";
 import Toast from "../Toast";
 import { Container } from "./ToastContainer.styled";
-import { useToast } from "../../providers/ToastProviders/ToastContext/useToasts";
+import useToastsStore from "../../store/toastsStore";
 
 const ToastContainer = () => {
-  const { toasts, deleteToast } = useToast();
+  const { toasts, deleteToast } = useToastsStore();
 
   return createPortal(
     <Container>
