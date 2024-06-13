@@ -7,12 +7,12 @@ interface ToastsState {
   deleteToast: (id: number) => void;
 }
 
-const createToast = (toast: ToastData, state: ToastsState) => {
+const createToast = (toast: ToastData, state: ToastsState): Partial<ToastsState> => {
   if (toast.duration) setTimeout(() => state.deleteToast(toast.id), toast.duration);
   return { toasts: [...state.toasts, toast] };
 };
 
-const deleteToast = (id: number, state: ToastsState) => {
+const deleteToast = (id: number, state: ToastsState): Partial<ToastsState> => {
   return { toasts: state.toasts.filter((toast) => toast.id !== id) };
 };
 
