@@ -46,7 +46,7 @@ export const ToastBody = styled.div<{ type: ToastType }>`
 export const FadeOutAnimation = styled.div<{ duration: number }>`
   animation: ${entranceAnimation} ${ANIMATION_DURATION}ms cubic-bezier(0.59, 0.02, 0.76, 0.78);
   animation-direction: reverse;
-  animation-delay: ${({ duration }) => duration - 500}ms;
+  animation-delay: ${({ duration }) => duration - 450}ms;
 `;
 
 export const ToastContent = styled.div`

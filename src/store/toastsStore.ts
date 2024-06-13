@@ -7,16 +7,23 @@ interface ToastsState {
   deleteToast: (id: number) => void;
 }
 
-const useToastsStore = create<ToastsState>((set) => ({
-  toasts: [],
+const createToast = (toast: ToastData, state: ToastsState) => {
+  if (toast.duration) setTimeout(() => state.deleteToast(toast.id), toast.duration);
+  return { toasts: [...state.toasts, toast] };
+};
 
-  createToast: (toast) =>
-    set((state) => {
-      if (toast.duration) setTimeout(() => state.deleteToast(toast.id), toast.duration);
-      return { toasts: [...state.toasts, toast] };
-    }),
+const deleteToast = (id: number, state: ToastsState) => {
+  return { toasts: state.toasts.filter((toast) => toast.id !== id) };
+};
 
-  deleteToast: (id) => set((state) => ({ toasts: state.toasts.filter((toast) => toast.id !== id) })),
-}));
+const useToastsStore = create<ToastsState>(
+  (set): ToastsState => ({
+    toasts: [],
+
+    createToast: (toast) => set((state) => createToast(toast, state)),
+
+    deleteToast: (id) => set((state) => deleteToast(id, state)),
+  })
+);
 
 export default useToastsStore;
